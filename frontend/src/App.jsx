@@ -21,7 +21,7 @@ function App(){
   const addItem = () =>{
     axios
     .post(API_URL, {name: newItem})
-    .then(response => setItems(...items, response.data))
+    .then(response => setItems([...items, response.data]))
     .catch(error => console.error("Error Adding item:", error));
   };
 
@@ -51,7 +51,7 @@ function App(){
       <input type="text" value={newItem} onChange={(e) => setNewItem(e.target.value)} placeholder="Add new item"/>
       <button onClick={addItem}>Add Item</button>
       <ul>
-        {items.map(item => (
+        {items && items.map(item => (
           <li key={item.id}>
             <input type="text" value={item.name} onChange={(e) => updateItem(item.id, e.target.value)}/>
             <button onClick={() => deleteItem(item.id)}>Delete</button>
